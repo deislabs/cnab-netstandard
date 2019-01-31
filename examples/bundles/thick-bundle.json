@@ -1,0 +1,55 @@
+{
+    "schemaVersion": "v1",
+    "name": "helloworld",
+    "version": "1.0.0",
+    "description": "An example 'thick' helloworld Cloud-Native Application Bundle",
+    "invocationImages": [
+        {
+            "imageType": "docker",
+            "image": "technosophos/helloworld:1.2.3",
+            "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+            "size": 1337,
+            "digest": "sha256:aaaaaaaaaaaa...",
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        }
+    ],
+    "images": {
+        "my-microservice": {
+            "image": "technosophos/helloworld:0.1.2",
+            "description": "helloworld microservice",
+            "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+            "size": 1337,
+            "digest": "sha256:bbbbbbbbbbbb...",
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        }
+    },
+    "parameters": {
+        "backend_port" : {
+            "type" : "int",
+            "defaultValue": 80,
+            "minValue": 10,
+            "maxValue": 10240,
+            "metadata": {
+               "description": "The port that the backend will listen on"
+            }
+        }
+    },
+    "credentials": {
+        "kubeconfig": {
+            "path": "/home/.kube/config"
+        },
+        "image_token": {
+            "env": "AZ_IMAGE_TOKEN"
+        },
+        "hostkey": {
+            "path": "/etc/hostkey.txt",
+            "env": "HOST_KEY"
+        }
+    }
+}
