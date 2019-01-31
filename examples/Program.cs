@@ -11,7 +11,7 @@ namespace Examples
         static void Main(string[] args)
         {
             var bundle = Bundle.LoadUnsigned("bundles/thin-bundle.json");
-            Console.WriteLine(bundle.Description);
+            Console.WriteLine(JsonConvert.SerializeObject(bundle));
         }
     }
 }
