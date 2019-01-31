@@ -9,7 +9,7 @@ namespace Cnab.JsonConverters
     public class ParameterConverter : JsonConverter
     {
         public override bool CanWrite { get { return false; } }
-        
+
         public override bool CanConvert(Type objectType)
         {
             return typeof(Parameter).IsAssignableFrom(objectType);
@@ -21,21 +21,20 @@ namespace Cnab.JsonConverters
             switch (item["type"].ToString())
             {
                 case "int":
-                    var intParam = new IntParameter();
-                    return populateParameter(item.CreateReader(), serializer, intParam);
+                    return populateParameter(item.CreateReader(), serializer, new IntParameter());
                 case "string":
-                    var stringParam = new StringParameter();
-                    return populateParameter(item.CreateReader(), serializer, stringParam);
+                    return populateParameter(item.CreateReader(), serializer, new StringParameter());
 
                 case "bool":
-                    var boolParam = new BoolParameter();
-                    return populateParameter(item.CreateReader(), serializer, boolParam);
+                    return populateParameter(item.CreateReader(), serializer, new BoolParameter());
 
                 default:
                     return null;
             }
         }
 
+        // because CanWrite returns false, it means this method should never be executed
+        // it is declared here to satisfy the implementation of the JsonConverter abstract class
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
