@@ -10,17 +10,8 @@ namespace Examples
     {
         static void Main(string[] args)
         {
-            var bundle = LoadBundleFile("bundles/thick-bundle.json");
-            Console.WriteLine(bundle.ToString());
-        }
-
-        public static Bundle LoadBundleFile (string fileName)
-        {
-            using (StreamReader reader = new StreamReader(fileName))
-            {
-                var json = reader.ReadToEnd();
-                return JsonConvert.DeserializeObject<Bundle>(json);
-            }
+            var bundle = Bundle.LoadUnsigned("bundles/thin-bundle.json");
+            Console.WriteLine(bundle.Description);
         }
     }
 }

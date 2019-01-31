@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+using System.IO;
 using Cnab.JsonConverters;
 using Newtonsoft.Json;
 
@@ -31,5 +31,14 @@ namespace Cnab.Bundle
 
         [JsonProperty("actions")]
         public Dictionary<string, Action> Actions { get; set; }
+
+        public static Bundle LoadUnsigned(string fileName)
+        {
+            using (StreamReader reader = new StreamReader(fileName))
+            {
+                var json = reader.ReadToEnd();
+                return JsonConvert.DeserializeObject<Bundle>(json);
+            }
+        }
     }
 }
