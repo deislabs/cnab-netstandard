@@ -22,6 +22,7 @@ namespace Cnab.JsonConverters
             {
                 case "int":
                     return populateParameter(item.CreateReader(), serializer, new IntParameter());
+                    
                 case "string":
                     return populateParameter(item.CreateReader(), serializer, new StringParameter());
 
