@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 
+using Cnab.JsonConverters;
 using Newtonsoft.Json;
 
 namespace Cnab.Bundle

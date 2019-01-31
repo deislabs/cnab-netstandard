@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using Cnab.JsonConverters;
 using Newtonsoft.Json;
 
 namespace Cnab.Bundle
 {
+    [JsonConverter(typeof(ParameterConverter))]
     public abstract class Parameter
     {
         [JsonProperty("type")]
