@@ -44,6 +44,7 @@ namespace Cnab.JsonConverters
         private Parameter populateParameter(JsonReader reader, JsonSerializer serializer, Parameter destination)
         {
             serializer.Populate(reader, destination);
+            
             return destination;
         }
     }

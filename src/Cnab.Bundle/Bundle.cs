@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using Cnab.JsonConverters;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace Cnab.Bundle
 {
@@ -33,11 +34,12 @@ namespace Cnab.Bundle
         [JsonProperty("actions")]
         public Dictionary<string, Action> Actions { get; set; }
 
-        public static Bundle LoadUnsigned(string fileName)
+        public static async Task<Bundle> LoadUnsignedAsync(string fileName)
         {
             using (StreamReader reader = new StreamReader(fileName))
             {
-                var json = reader.ReadToEnd();
+                var json = await reader.ReadToEndAsync();
+                
                 return JsonConvert.DeserializeObject<Bundle>(json);
             }
         }
