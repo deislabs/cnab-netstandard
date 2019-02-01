@@ -5,10 +5,12 @@ Work in Progress library for working with Cloud Native Application Bundles in C#
 ## Usage
 
 ```csharp
-static void Main(string[] args)
+static async Task Main(string[] args)
 {
-    var bundle = Bundle.LoadUnsigned("bundles/thin-bundle.json");
-    Console.WriteLine(bundle.Description);
+    var bundle = await Bundle.LoadUnsignedAsync("bundles/thin-bundle.json");
+
+    Console.WriteLine(
+        JsonConvert.SerializeObject(bundle, Formatting.Indented));
 }
 ```
 
