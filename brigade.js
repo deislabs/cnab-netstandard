@@ -4,11 +4,11 @@ const gh = require("brigade-utils-test/out/github");
 const projectName = "cnab-netstandard";
 const dotnetImg = "microsoft/dotnet:2.2.103-sdk";
 
-events.on("check_suite:requested", runTests);
-events.on("check_suite:rerequested", runTests);
-events.on("check_run:rerequested", runTests);
+brig.events.on("check_suite:requested", runTests);
+brig.events.on("check_suite:rerequested", runTests);
+brig.events.on("check_run:rerequested", runTests);
 
-events.on("exec", (e, p) => {
+brig.events.on("exec", (e, p) => {
     var job = build(e, p);
     job.run();
 });
