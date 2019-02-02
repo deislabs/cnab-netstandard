@@ -1,5 +1,5 @@
 const { events, Job } = require("brigadier");
-const { Notification, WrapNotification } = require("brigade-utils-test/out/github");
+const { Notification, WrapNotification } = require("brigade-utils-test/out/exact-github");
 
 const projectName = "cnab-netstandard";
 const dotnetImg = "microsoft/dotnet:2.2.103-sdk";
