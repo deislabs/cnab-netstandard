@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnab", "src\Cnab.csproj", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{8C42C490-969D-4A2A-BD16-9EEAD3337703}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnab.Test", "test\Cnab.Test\Cnab.Test.csproj", "{C418FF7F-ADCB-44D1-B7B4-1746CA86E1ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnab.Test", "test\Cnab.Test.csproj", "{C418FF7F-ADCB-44D1-B7B4-1746CA86E1ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "examples\Examples.csproj", "{FC49EF21-E872-455D-9D61-79848B3B8E2B}"
 EndProject
