@@ -1,5 +1,5 @@
 const { events, Job } = require("brigadier");
-const gh = require("brigade-utils-test/out/github");
+const { Notification, WrapNotification } = require("brigade-utils-test/out/github");
 
 const projectName = "cnab-netstandard";
 const dotnetImg = "microsoft/dotnet:2.2.103-sdk";
@@ -14,12 +14,12 @@ events.on("exec", (e, p) => {
 });
 
 function runTests(e, p) {
-    var note = new gh.Notification('tests', e, p);
+    var note = new Notification('tests', e, p);
     note.conclusion = "";
     note.title = "Run Tests";
     note.summary = "This test ensures the project builds, all tests pass, and the example run is successful."
 
-    return gh.WrapNotification(build(e, p), note);
+    return WrapNotification(build(e, p), note);
 }
 
 function build(e, p) {
