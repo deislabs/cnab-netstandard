@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Cnab.Bundle;
 
-namespace Cnab.Tests
+namespace Cnab.Bundle.Tests
 {
     [TestClass()]
     public class BundleTests
@@ -11,7 +11,7 @@ namespace Cnab.Tests
         [TestMethod]
         public async Task TestLoadUnsigned()
         {
-            var bundle = await Bundle.Bundle.LoadUnsignedAsync("../../../../examples/bundles/thin-bundle.json");
+            var bundle = await Bundle.LoadUnsignedAsync("../../../../examples/bundles/thin-bundle.json");
 
             Assert.AreEqual("helloworld", bundle.Name);
             Assert.AreEqual("0.1.2", bundle.Version);

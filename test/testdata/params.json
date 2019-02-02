@@ -1,0 +1,40 @@
+{
+    "parameters": {
+        "backend_port": {
+            "defaultValue": 8080,
+            "type": "int",
+            "minValue": 10,
+            "maxValue": 10240,
+            "allowedValues": [80, 8000, 8080],
+            "destination": {
+                "env": "BACKEND_PORT"
+            },
+            "metadata": {
+                "description": "this will be $CNAB_P_PORT"
+            }
+        },
+        "greeting": {
+            "defaultValue": "hello",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 46,
+            "allowedValues": ["hello", "goodbye", "gday"],
+            "destination": {
+                "env": "GREETING"
+            },
+            "metadata":{
+                "description": "this will be in $GREETING"
+            }
+        },
+        "isAdmin": {
+            "defaultValue": false,
+            "type": "bool",
+            "destination": {
+                "path": "/opt/example-parameters/config.txt"
+            },
+            "metadata": {
+                "description": "this will be located in a file"
+            }
+        }
+    }
+}
