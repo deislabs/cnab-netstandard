@@ -13,7 +13,10 @@ namespace Cnab.Bundle
         bool Required { get; set; }
         ParameterMetadata Metadata { get; set; }
         Location Destination { get; set; }
-        bool IsValid(object value);
+
+        bool IsValid(string value);
+        bool IsValid(int value);
+        bool IsValid(bool value);
     }
 
     public abstract class Parameter<T> : IParameter
@@ -36,7 +39,9 @@ namespace Cnab.Bundle
         [JsonProperty("destination")]
         public Location Destination { get; set; }
 
-        public abstract bool IsValid(object value);
+        public abstract bool IsValid(string value);
+        public abstract bool IsValid(int value);
+        public abstract bool IsValid(bool value);
     }
 
     public class ParameterMetadata
@@ -53,31 +58,45 @@ namespace Cnab.Bundle
         [JsonProperty("maxLength")]
         public int MaximumLength { get; set; }
 
-        public override bool IsValid(object value)
+        public override bool IsValid(string value)
         {
-            if (!(value is string))
+            if (!this.AllowedValues.Contains(value))
                 return false;
 
-            var stringVal = value as string;
-            if (!this.AllowedValues.Contains(stringVal))
-                return false;
-
-            if ((stringVal.Length < this.MinimumLength) || (stringVal.Length > this.MaximumLength))
+            if ((value.Length < this.MinimumLength) || (value.Length > this.MaximumLength))
                 return false;
 
             return true;
+        }
+
+        public override bool IsValid(bool value)
+        {
+            return false;
+        }
+
+        public override bool IsValid(int value)
+        {
+            return false;
         }
     }
 
     public class BoolParameter : Parameter<bool>
     {
-        public override bool IsValid(object value)
+        public override bool IsValid(bool value)
         {
-            if (!(value is bool))
-                return false;
-            
             return true;
         }
+
+        public override bool IsValid(string value)
+        {
+            return false;
+        }
+
+        public override bool IsValid(int value)
+        {
+            return false;
+        }
+
     }
 
     public class IntParameter : Parameter<int>
@@ -88,22 +107,25 @@ namespace Cnab.Bundle
         [JsonProperty("maxValue")]
         public int MaximumValue { get; set; }
 
-        public override bool IsValid(object value)
-        {   
-            // TODO - this is rather naive
-            // it should probably handle values such as "80" or 80.0
-            
-            if (!(value is int))
+        public override bool IsValid(int value)
+        {
+            if (!this.AllowedValues.Contains(value))
                 return false;
 
-            var intVal = Convert.ToInt32(value);
-            if (!this.AllowedValues.Contains(intVal))
-                return false;
-
-            if ((intVal < this.MinimumValue) || (intVal > this.MaximumValue))
+            if ((value < this.MinimumValue) || (value > this.MaximumValue))
                 return false;
 
             return true;
+        }
+
+        public override bool IsValid(string value)
+        {
+            return false;
+        }
+
+        public override bool IsValid(bool value)
+        {
+            return false;
         }
     }
 }
