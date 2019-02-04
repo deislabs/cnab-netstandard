@@ -16,8 +16,8 @@
         "greeting": {
             "defaultValue": "hello",
             "type": "string",
-            "minLength": 1,
-            "maxLength": 46,
+            "minLength": 5,
+            "maxLength": 10,
             "allowedValues": ["hello", "goodbye", "gday"],
             "destination": {
                 "env": "GREETING"
