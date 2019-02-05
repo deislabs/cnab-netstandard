@@ -12,7 +12,7 @@ namespace Cnab.JsonConverters
 
         public override bool CanConvert(Type objectType)
         {
-            return typeof(IParameter).IsAssignableFrom(objectType);
+            return typeof(IParameterDefinition).IsAssignableFrom(objectType);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -41,7 +41,7 @@ namespace Cnab.JsonConverters
             throw new NotImplementedException();
         }
 
-        private IParameter populateParameter(JsonReader reader, JsonSerializer serializer, IParameter destination)
+        private IParameterDefinition populateParameter(JsonReader reader, JsonSerializer serializer, IParameterDefinition destination)
         {
             serializer.Populate(reader, destination);
             

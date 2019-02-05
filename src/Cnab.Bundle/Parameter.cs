@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Cnab.Bundle
 {
     [JsonConverter(typeof(ParameterConverter))]
-    public interface IParameter
+    public interface IParameterDefinition
     {
         string DataType { get; set; }
         bool Required { get; set; }
@@ -19,7 +19,7 @@ namespace Cnab.Bundle
         ValidationResult IsValid(bool value);
     }
 
-    public abstract class Parameter<T> : IParameter
+    public abstract class Parameter<T> : IParameterDefinition
     {
         [JsonProperty("type")]
         public string DataType { get; set; }
