@@ -21,13 +21,13 @@ namespace Cnab.JsonConverters
             switch (item["type"].ToString())
             {
                 case "int":
-                    return populateParameter(item.CreateReader(), serializer, new IntParameter());
+                    return PopulateParameter(item.CreateReader(), serializer, new IntParameter());
                     
                 case "string":
-                    return populateParameter(item.CreateReader(), serializer, new StringParameter());
+                    return PopulateParameter(item.CreateReader(), serializer, new StringParameter());
 
                 case "bool":
-                    return populateParameter(item.CreateReader(), serializer, new BoolParameter());
+                    return PopulateParameter(item.CreateReader(), serializer, new BoolParameter());
 
                 default:
                     return null;
@@ -41,7 +41,7 @@ namespace Cnab.JsonConverters
             throw new NotImplementedException();
         }
 
-        private IParameterDefinition populateParameter(JsonReader reader, JsonSerializer serializer, IParameterDefinition destination)
+        private IParameterDefinition PopulateParameter(JsonReader reader, JsonSerializer serializer, IParameterDefinition destination)
         {
             serializer.Populate(reader, destination);
             
