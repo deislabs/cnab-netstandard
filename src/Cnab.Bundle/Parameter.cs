@@ -14,9 +14,9 @@ namespace Cnab.Bundle
         ParameterMetadata Metadata { get; set; }
         Location Destination { get; set; }
 
-        bool IsValid(string value);
-        bool IsValid(int value);
-        bool IsValid(bool value);
+        ValidationResult IsValid(string value);
+        ValidationResult IsValid(int value);
+        ValidationResult IsValid(bool value);
     }
 
     public abstract class Parameter<T> : IParameter
@@ -39,9 +39,9 @@ namespace Cnab.Bundle
         [JsonProperty("destination")]
         public Location Destination { get; set; }
 
-        public abstract bool IsValid(string value);
-        public abstract bool IsValid(int value);
-        public abstract bool IsValid(bool value);
+        public abstract ValidationResult IsValid(string value);
+        public abstract ValidationResult IsValid(int value);
+        public abstract ValidationResult IsValid(bool value);
     }
 
     public class ParameterMetadata
@@ -58,45 +58,87 @@ namespace Cnab.Bundle
         [JsonProperty("maxLength")]
         public int MaximumLength { get; set; }
 
-        public override bool IsValid(string value)
+        public override ValidationResult IsValid(string value)
         {
-            if (!this.AllowedValues.Contains(value))
-                return false;
+            if ((this.AllowedValues.Count != 0) && (!this.AllowedValues.Contains(value)))
+            {
+                return new ValidationResult()
+                {
+                    Succeeded = false,
+                    ValidationError = $"value {value} is not in the set of allowed values for this parameter"
+                };
+            }
 
-            if ((value.Length < this.MinimumLength) || (value.Length > this.MaximumLength))
-                return false;
+            if ((this.MinimumLength != 0) && (value.Length < this.MinimumLength))
+            {
+                return new ValidationResult()
+                {
+                    Succeeded = false,
+                    ValidationError = $"value {value} is too short: minimum length is ${this.MinimumLength}"
+                };
+            }
 
-            return true;
+            if ((this.MaximumLength != 0) && (value.Length > this.MaximumLength))
+            {
+                return new ValidationResult()
+                {
+                    Succeeded = false,
+                    ValidationError = $"value {value} is too long: maximum length is ${this.MaximumLength}"
+                };
+            }
+
+            return new ValidationResult()
+            {
+                Succeeded = true
+            };
         }
 
-        public override bool IsValid(bool value)
+        public override ValidationResult IsValid(bool value)
         {
-            return false;
+            return new ValidationResult()
+            {
+                Succeeded = false,
+                ValidationError = $"value ${value} is not string"
+            };
         }
 
-        public override bool IsValid(int value)
+        public override ValidationResult IsValid(int value)
         {
-            return false;
+            return new ValidationResult()
+            {
+                Succeeded = false,
+                ValidationError = $"value {value} is not string"
+            };
         }
     }
 
     public class BoolParameter : Parameter<bool>
     {
-        public override bool IsValid(bool value)
+        public override ValidationResult IsValid(bool value)
         {
-            return true;
+            return new ValidationResult()
+            {
+                Succeeded = true,
+            };
         }
 
-        public override bool IsValid(string value)
+        public override ValidationResult IsValid(string value)
         {
-            return false;
+            return new ValidationResult()
+            {
+                Succeeded = false,
+                ValidationError = $"value {value} is not a boolean"
+            };
         }
 
-        public override bool IsValid(int value)
+        public override ValidationResult IsValid(int value)
         {
-            return false;
+            return new ValidationResult()
+            {
+                Succeeded = false,
+                ValidationError = $"value {value} is not a boolean"
+            };
         }
-
     }
 
     public class IntParameter : Parameter<int>
@@ -107,25 +149,57 @@ namespace Cnab.Bundle
         [JsonProperty("maxValue")]
         public int MaximumValue { get; set; }
 
-        public override bool IsValid(int value)
+        public override ValidationResult IsValid(int value)
         {
-            if (!this.AllowedValues.Contains(value))
-                return false;
+            if ((this.AllowedValues.Count != 0) && (!this.AllowedValues.Contains(value)))
+            {
+                return new ValidationResult()
+                {
+                    Succeeded = false,
+                    ValidationError = $"value {value} is not in the set of allowed values for this parameter"
+                };
+            }
 
-            if ((value < this.MinimumValue) || (value > this.MaximumValue))
-                return false;
+            if ((this.MinimumValue != 0) && (value < this.MinimumValue))
+            {
+                return new ValidationResult()
+                {
+                    Succeeded = false,
+                    ValidationError = $"value {value} is too low: minimum value is ${this.MinimumValue}"
+                };
+            }
 
-            return true;
+            if ((this.MaximumValue != 0) && (value > this.MaximumValue))
+            {
+                return new ValidationResult()
+                {
+                    Succeeded = false,
+                    ValidationError = $"value {value} is too high: maximum value is ${this.MaximumValue}"
+                };
+            }
+
+            return new ValidationResult()
+            {
+                Succeeded = true
+            };
         }
 
-        public override bool IsValid(string value)
+        public override ValidationResult IsValid(bool value)
         {
-            return false;
+            return new ValidationResult()
+            {
+                Succeeded = false,
+                ValidationError = $"value ${value} is not integer"
+            };
         }
 
-        public override bool IsValid(bool value)
+        public override ValidationResult IsValid(string value)
         {
-            return false;
+            return new ValidationResult()
+            {
+                Succeeded = false,
+                ValidationError = $"value {value} is not integer"
+            };
         }
     }
 }

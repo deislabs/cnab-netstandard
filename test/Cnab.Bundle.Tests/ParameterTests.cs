@@ -37,10 +37,10 @@ namespace Cnab.Bundle.Tests
             Assert.AreEqual(10240, (backendPort as IntParameter).MaximumValue);
             Assert.AreEqual(true, TestUtil.EqualsAll((backendPort as IntParameter).AllowedValues, new List<int>() { 80, 8000, 8080 }));
 
-            Assert.AreEqual(true, backendPort.IsValid(80));
-            Assert.AreEqual(false, backendPort.IsValid(81));
-            Assert.AreEqual(false, backendPort.IsValid("80"));
-            Assert.AreEqual(false, backendPort.IsValid("this is not valid"));
+            Assert.AreEqual(true, backendPort.IsValid(80).Succeeded);
+            Assert.AreEqual(false, backendPort.IsValid(81).Succeeded);
+            Assert.AreEqual(false, backendPort.IsValid("80").Succeeded);
+            Assert.AreEqual(false, backendPort.IsValid("this is not valid").Succeeded);
         }
 
         [TestMethod]
@@ -58,10 +58,10 @@ namespace Cnab.Bundle.Tests
             Assert.AreEqual(10, (greeting as StringParameter).MaximumLength);
             Assert.AreEqual(true, TestUtil.EqualsAll((greeting as StringParameter).AllowedValues, new List<string>() { "hello", "goodbye", "gday" }));
 
-            Assert.AreEqual(true, greeting.IsValid("hello"));
-            Assert.AreEqual(false, greeting.IsValid("abcd"));
-            Assert.AreEqual(false, greeting.IsValid("this string is longer than the maximum length, so it's not valid"));
-            Assert.AreEqual(false, greeting.IsValid(46));
+            Assert.AreEqual(true, greeting.IsValid("hello").Succeeded);
+            Assert.AreEqual(false, greeting.IsValid("abcd").Succeeded);
+            Assert.AreEqual(false, greeting.IsValid("this string is longer than the maximum length, so it's not valid").Succeeded);
+            Assert.AreEqual(false, greeting.IsValid(46).Succeeded);
         }
 
         [TestMethod]
