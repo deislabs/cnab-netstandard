@@ -35,7 +35,12 @@ namespace Cnab.Bundle.Tests
             Assert.AreEqual(8080, (backendPort as IntParameter).DefaultValue);
             Assert.AreEqual(10, (backendPort as IntParameter).MinimumValue);
             Assert.AreEqual(10240, (backendPort as IntParameter).MaximumValue);
-            Assert.AreEqual(true, TestUtil.EqualsAll((backendPort as IntParameter).AllowedValues, new List<int>(){80, 8000, 8080}));
+            Assert.AreEqual(true, TestUtil.EqualsAll((backendPort as IntParameter).AllowedValues, new List<int>() { 80, 8000, 8080 }));
+
+            Assert.AreEqual(true, backendPort.IsValid(80).Succeeded);
+            Assert.AreEqual(false, backendPort.IsValid(81).Succeeded);
+            Assert.AreEqual(false, backendPort.IsValid("80").Succeeded);
+            Assert.AreEqual(false, backendPort.IsValid("this is not valid").Succeeded);
         }
 
         [TestMethod]
@@ -49,9 +54,14 @@ namespace Cnab.Bundle.Tests
             Assert.AreEqual("GREETING", greeting.Destination.EnvironmentVariable);
             Assert.IsInstanceOfType(greeting, typeof(StringParameter));
             Assert.AreEqual("hello", (greeting as StringParameter).DefaultValue);
-            Assert.AreEqual(1, (greeting as StringParameter).MinimumLength);
-            Assert.AreEqual(46, (greeting as StringParameter).MaximumLength);
-            Assert.AreEqual(true, TestUtil.EqualsAll((greeting as StringParameter).AllowedValues, new List<string>(){"hello", "goodbye", "gday"}));
+            Assert.AreEqual(5, (greeting as StringParameter).MinimumLength);
+            Assert.AreEqual(10, (greeting as StringParameter).MaximumLength);
+            Assert.AreEqual(true, TestUtil.EqualsAll((greeting as StringParameter).AllowedValues, new List<string>() { "hello", "goodbye", "gday" }));
+
+            Assert.AreEqual(true, greeting.IsValid("hello").Succeeded);
+            Assert.AreEqual(false, greeting.IsValid("abcd").Succeeded);
+            Assert.AreEqual(false, greeting.IsValid("this string is longer than the maximum length, so it's not valid").Succeeded);
+            Assert.AreEqual(false, greeting.IsValid(46).Succeeded);
         }
 
         [TestMethod]

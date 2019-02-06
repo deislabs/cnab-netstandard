@@ -32,7 +32,7 @@ namespace Cnab.Bundle
         public Dictionary<string, Image> Images { get; set; }
 
         [JsonProperty("parameters")]
-        public Dictionary<string, Parameter> Parameters { get; set; }
+        public Dictionary<string, IParameterDefinition> Parameters { get; set; }
 
         [JsonProperty("credentials")]
         public Dictionary<string, Location> Credentials { get; set; }
