@@ -6,22 +6,22 @@ namespace Cnab.Bundle
 {
     public class Image : BaseImage
     {
-        [JsonProperty("description")]
+        [JsonProperty("description", Required = Required.AllowNull)]
         public string Description { get; set; }
 
-        [JsonProperty("refs")]
+        [JsonProperty("refs", Required = Required.Always)]
         public List<LocationReference> LocationReferences { get; set; }
     }
 
     public class LocationReference
     {
-        [JsonProperty("path")]
+        [JsonProperty("path", Required = Required.Always)]
         public string Path { get; set; }
 
-        [JsonProperty("field")]
+        [JsonProperty("field", Required = Required.Always)]
         public string Field { get; set; }
 
-        [JsonProperty("mediaType")]
+        [JsonProperty("mediaType", Required = Required.AllowNull)]
         public string MediaType { get; set; }
     }
 }

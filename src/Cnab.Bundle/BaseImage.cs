@@ -4,22 +4,22 @@ namespace Cnab.Bundle
 {
     public class BaseImage
     {
-        [JsonProperty("imageType")]
+        [JsonProperty("imageType", Required = Required.Always)]
         public string ImageType { get; set; }
 
-        [JsonProperty("image")]
+        [JsonProperty("image", Required = Required.Always)]
         public string Image { get; set; }
 
-        [JsonProperty("digest")]
+        [JsonProperty("digest", Required = Required.Always)]
         public string Digest { get; set; }
 
-        [JsonProperty("size")]
+        [JsonProperty("size", Required = Required.AllowNull)]
         public ulong Size { get; set; }
 
-        [JsonProperty("platform")]
+        [JsonProperty("platform", Required = Required.AllowNull)]
         public ImagePlatform Platform { get; set; }
 
-        [JsonProperty("mediaType")]
+        [JsonProperty("mediaType", Required = Required.AllowNull)]
         public string MediaType { get; set; }
     }
 
