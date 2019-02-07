@@ -4,13 +4,13 @@ namespace Cnab.Bundle
 {
     public class Maintainer
     {
-        [JsonProperty("name")]
+        [JsonProperty("name", Required = Required.AllowNull)]
         public string Name { get; set; }
 
-        [JsonProperty("email")]
+        [JsonProperty("email", Required = Required.AllowNull)]
         public string Email { get; set; }
 
-        [JsonProperty("url")]
+        [JsonProperty("url", Required = Required.AllowNull)]
         public string Url { get; set; }
     }
 }

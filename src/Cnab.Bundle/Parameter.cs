@@ -21,22 +21,22 @@ namespace Cnab.Bundle
 
     public abstract class Parameter<T> : IParameterDefinition
     {
-        [JsonProperty("type")]
+        [JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
         public string DataType { get; set; }
 
-        [JsonProperty("required")]
+        [JsonProperty("required", Required = Newtonsoft.Json.Required.AllowNull)]
         public bool Required { get; set; }
 
-        [JsonProperty("defaultValue")]
+        [JsonProperty("defaultValue", Required = Newtonsoft.Json.Required.AllowNull)]
         public T DefaultValue { get; set; }
 
-        [JsonProperty("allowedValues")]
+        [JsonProperty("allowedValues", Required = Newtonsoft.Json.Required.AllowNull)]
         public List<T> AllowedValues { get; set; }
 
-        [JsonProperty("metadata")]
+        [JsonProperty("metadata", Required = Newtonsoft.Json.Required.AllowNull)]
         public ParameterMetadata Metadata { get; set; }
 
-        [JsonProperty("destination")]
+        [JsonProperty("destination", Required = Newtonsoft.Json.Required.Always)]
         public Location Destination { get; set; }
 
         public abstract ValidationResult IsValid(string value);
@@ -46,16 +46,16 @@ namespace Cnab.Bundle
 
     public class ParameterMetadata
     {
-        [JsonProperty("description")]
+        [JsonProperty("description", Required = Newtonsoft.Json.Required.AllowNull)]
         public string Description { get; set; }
     }
 
     public class StringParameter : Parameter<string>
     {
-        [JsonProperty("minLength")]
+        [JsonProperty("minLength", Required = Newtonsoft.Json.Required.AllowNull)]
         public int MinimumLength { get; set; }
 
-        [JsonProperty("maxLength")]
+        [JsonProperty("maxLength", Required = Newtonsoft.Json.Required.AllowNull)]
         public int MaximumLength { get; set; }
 
         public override ValidationResult IsValid(string value)
@@ -143,10 +143,10 @@ namespace Cnab.Bundle
 
     public class IntParameter : Parameter<int>
     {
-        [JsonProperty("minValue")]
+        [JsonProperty("minValue", Required = Newtonsoft.Json.Required.AllowNull)]
         public int MinimumValue { get; set; }
 
-        [JsonProperty("maxValue")]
+        [JsonProperty("maxValue", Required = Newtonsoft.Json.Required.AllowNull)]
         public int MaximumValue { get; set; }
 
         public override ValidationResult IsValid(int value)
