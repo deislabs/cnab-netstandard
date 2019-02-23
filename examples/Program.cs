@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Cnab.Bundle;
+using Cnab;
 using Newtonsoft.Json;
 
 namespace Examples

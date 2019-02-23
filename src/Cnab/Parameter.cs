@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Cnab.JsonConverters;
 using Newtonsoft.Json;
 
-namespace Cnab.Bundle
+namespace Cnab
 {
     [JsonConverter(typeof(ParameterConverter))]
     public interface IParameterDefinition

@@ -5,7 +5,7 @@ using Cnab.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace Cnab.Bundle.Tests
+namespace Cnab.Tests
 {
     [TestClass()]
     public class ParameterTests

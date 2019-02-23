@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 using Newtonsoft.Json;
 
-namespace Cnab.Bundle
+namespace Cnab
 {
     public class Image : BaseImage
     {

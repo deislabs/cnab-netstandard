@@ -1,4 +1,4 @@
-namespace Cnab.Bundle
+namespace Cnab
 {
     public class ValidationResult
     {

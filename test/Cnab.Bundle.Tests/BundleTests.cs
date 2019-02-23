@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Cnab.Bundle;
+using Cnab;
 
-namespace Cnab.Bundle.Tests
+namespace Cnab.Tests
 {
     [TestClass()]
     public class BundleTests
