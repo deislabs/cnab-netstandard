@@ -6,7 +6,7 @@ using Cnab.JsonConverters;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 
-namespace Cnab.Bundle
+namespace Cnab
 {
     public class Bundle
     {

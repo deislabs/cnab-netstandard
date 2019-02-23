@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Cnab.Bundle
+namespace Cnab
 {
     public class Maintainer
     {

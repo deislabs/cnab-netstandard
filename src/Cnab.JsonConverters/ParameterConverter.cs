@@ -1,6 +1,6 @@
 using System;
 
-using Cnab.Bundle;
+using Cnab;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
